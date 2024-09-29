@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**tren-fashion-ramah-lingkungan
+    /**
      * Run the migrations.
      */
     public function up(): void
@@ -14,7 +14,10 @@ return new class extends Migration
         Schema::create('posts', function (Blueprint $table) {
             $table->id();
             $table->string('title');
-            $table->string('author');
+            $table->foreignId('author_id')->constrained(
+                table: 'users',
+                indexName: 'posts_author_id'
+            );
             $table->string('slug')->unique();
             $table->text('body');
             $table->timestamps();
